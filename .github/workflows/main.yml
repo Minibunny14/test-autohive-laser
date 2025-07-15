@@ -1,0 +1,27 @@
+name: Auto-Commit Docs
+
+on:
+  workflow_dispatch:  # Allows you to trigger the action manually from GitHub UI
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Git
+      run: |
+        git config --global user.name "Sachram Singh"
+        git config --global user.email "don70570@gmail.com"
+
+    - name: Create new branch
+      run: |
+        git checkout -b autohive-docs-update
+
+    - name: Commit generated docs
+      run: |
+        git add docs/LaserObstructionSystem.md
+        git commit -m "Add AutoHive-generated documentation"
+        git push origin autohive-docs-update
